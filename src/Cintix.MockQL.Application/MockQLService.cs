@@ -4,7 +4,7 @@ using Cintix.MockQL.Infrastructure.SQLite;
 
 namespace Cintix.MockQL.Infrastructure.Application;
 
-public class MockQlModelService
+public class MockQLService
 {
     public ModelDefinition BuildModel(params Type[] types) => ModelConverter.Convert(types);
 }
