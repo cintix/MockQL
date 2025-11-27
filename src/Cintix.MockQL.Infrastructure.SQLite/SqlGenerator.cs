@@ -1,5 +1,6 @@
 using System.Text;
-using Cintix.MockQL.Infrastructure.Domain;
+using Cintix.MockQL.Infrastructure.Domain.Enums;
+using Cintix.MockQL.Infrastructure.Domain.Models;
 
 namespace Cintix.MockQL.Infrastructure.SQLite;
 

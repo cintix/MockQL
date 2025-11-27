@@ -1,5 +1,6 @@
 using System;
 using Cintix.MockQL.Infrastructure.Application;
+using Cintix.MockQL.Infrastructure.Application.Services.ModelManagement;
 using Cintix.MockQL.Infrastructure.Domain;
 using Cintix.MockQL.Infrastructure.SQLite;
 
@@ -7,10 +8,19 @@ namespace Cintix.MockQL.Infrastructure.Demo;
 
 public class Program
 {
+    private readonly IModelConverter _modelConverter = new ModelConverter();
+    private readonly IModelWriter _modelWriter = new ModelWriter();
+
     public static void Main(string[] args)
     {
-        var model = ModelConverter.Convert(typeof(Worker));
-        ModelWriter.Build(model,"Cintix.Demo","/mnt/data/projects/MockQLDemo/");
+        Program program = new Program();
+        program.RunDemo();
+    }
+
+    private void RunDemo()
+    {
+        var model = _modelConverter.Convert(typeof(Worker));
+        _modelWriter.Build(model, "Cintix.Demo", "/mnt/data/projects/MockQLDemo/");
         Console.WriteLine($"TOTAL TABLES: {model.Tables.Count}");
         foreach (var table in model.Tables.Values)
         {

@@ -1,13 +1,14 @@
 using System.Text;
-using Cintix.MockQL.Infrastructure.Domain;
+using Cintix.MockQL.Infrastructure.Domain.Enums;
+using Cintix.MockQL.Infrastructure.Domain.Models;
 
-namespace Cintix.MockQL.Infrastructure.Application;
+namespace Cintix.MockQL.Infrastructure.Application.Services.ModelManagement;
 
-public static class ModelWriter
+public class ModelWriter : IModelWriter
 {
-    private static ModelDefinition _model;
+    private ModelDefinition _model;
 
-    public static void Build(ModelDefinition model, string @namespace, string path)
+    public void Build(ModelDefinition model, string @namespace, string path)
     {
         _model = model;
         string basePath = Path.Combine(path, "MockQL");
@@ -24,7 +25,7 @@ public static class ModelWriter
         }
     }
 
-    private static void WriteModel(SQLTable table, string modelPath, string ns)
+    private void WriteModel(SQLTable table, string modelPath, string ns)
     {
         string fileName = Path.Combine(modelPath, $"{table.Name}.cs");
         var sb = new StringBuilder();
@@ -60,7 +61,7 @@ public static class ModelWriter
         File.WriteAllText(fileName, sb.ToString());
     }
 
-    private static void WriteService(SQLTable table, string servicePath, string ns)
+    private void WriteService(SQLTable table, string servicePath, string ns)
     {
         string className = $"{table.Name}Service";
         var sb = new StringBuilder();
@@ -279,7 +280,7 @@ public static class ModelWriter
         File.WriteAllText(Path.Combine(servicePath, $"{className}.cs"), sb.ToString());
     }
 
-    private static string MapReaderMethod(SQLType type) => type switch
+    private string MapReaderMethod(SQLType type) => type switch
     {
         SQLType.Int => "Int32",
         SQLType.Real => "Double",
@@ -290,12 +291,12 @@ public static class ModelWriter
         _ => "Value"
     };
 
-    private static string EscapeSql(string value) =>
+    private string EscapeSql(string value) =>
         value.Replace("\"", "\"\"").Replace("\r", "").Replace("\n", " ");
 
-    private static string ToLowerFirst(string v) => char.ToLower(v[0]) + v.Substring(1);
+    private string ToLowerFirst(string v) => char.ToLower(v[0]) + v.Substring(1);
 
-    private static string ToSqlCase(string name)
+    private string ToSqlCase(string name)
     {
         var sb = new StringBuilder();
         for (int i = 0; i < name.Length; i++)
@@ -308,10 +309,10 @@ public static class ModelWriter
         return sb.ToString();
     }
 
-    private static string Pascal(string name) =>
+    private string Pascal(string name) =>
         char.ToUpper(name[0]) + name.Substring(1);
 
-    private static string MapToClrType(SQLType t) => t switch
+    private string MapToClrType(SQLType t) => t switch
     {
         SQLType.Int => "int",
         SQLType.Real => "double",
@@ -322,5 +323,5 @@ public static class ModelWriter
         _ => "object"
     };
 
-    private static string SqlParam(string name) => $"{ToSqlCase(name)}";
+    private string SqlParam(string name) => $"{ToSqlCase(name)}";
 }
