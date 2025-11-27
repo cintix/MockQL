@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Cintix.MockQL.Infrastructure.Domain\Cintix.MockQL.Infrastructure.Domain.csproj" />
+    <ProjectReference Include="..\Cintix.MockQL.Domain\Cintix.MockQL.Domain.csproj" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.Data.Sqlite" Version="10.0.0" />

@@ -3,5 +3,6 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <RootNamespace>Cintix.MockQL.Infrastructure.Domain</RootNamespace>
   </PropertyGroup>
 </Project>

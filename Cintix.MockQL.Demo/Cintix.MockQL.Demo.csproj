@@ -1,11 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <OutputType>Exe</OutputType>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <RootNamespace>Cintix.MockQL.Infrastructure.Demo</RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Cintix.MockQL.Infrastructure.Domain\Cintix.MockQL.Infrastructure.Domain.csproj" />
+    <ProjectReference Include="..\Cintix.MockQL.Application\Cintix.MockQL.Application.csproj" />
     <ProjectReference Include="..\Cintix.MockQL.Infrastructure.SQLite\Cintix.MockQL.Infrastructure.SQLite.csproj" />
+    <ProjectReference Include="..\Cintix.MockQL.Domain\Cintix.MockQL.Domain.csproj" />
   </ItemGroup>
 </Project>
